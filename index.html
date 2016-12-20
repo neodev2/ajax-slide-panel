@@ -5,13 +5,61 @@
 		<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<script>
 		$(document).ready(function(){
-			$("#expand").on("click", function(){
-				$(".standorte-wrapper").toggleClass("expand");
+			
+			$('.pan-item > button').on('click', function(){
+				
+				if($('.panel.left').hasClass('open')){
+						
+					//alert('already open');
+					
+					if($(this).hasClass('triggerer')){
+						
+						//...
+						
+					}else{
+						
+						$(this).addClass('triggerer');
+						
+						$.ajax({
+							method: 'GET',
+							url: $(this).attr('data-url'),
+							success: function(data){
+								//console.log(data);
+								$(this).parent().find('>.php-content').html(data);
+							}
+						});
+						
+					}
+					
+				}else{
+					
+					$('.panel.left').addClass('open');
+					$('.standorte-wrapper').addClass('expand');
+					
+					$(this).addClass('triggerer');
+					
+					$.ajax({
+						method: 'GET',
+						url: $(this).attr('data-url'),
+						success: function(data){
+							//console.log(data);
+							$(this).parent().find('>.php-content').html(data);
+						}
+					});
+					
+				}
+				
 			});
 			
-			$("#close").on("click", function(){
-				$(".standorte-wrapper").toggleClass("expand");
+			
+			$('#close').on('click', function(){
+				
+				$('.pan-item > button.triggerer').removeClass('triggerer');
+				$('.panel.left').removeClass('open');
+				$('.standorte-wrapper').removeClass('expand');
+				
 			});
+			
 		});
 		</script>
 	</head>
@@ -19,28 +67,36 @@
 	<body>
 		
 		<div class="standorte-wrapper">
+			
 			<div class="panel left">
 				<div class="pan-item tl">
-					<button href="#" id="expand" class="show-hide">TOGGLE</button>
+					<div class="php-content"></div>
+					<button data-url="snip1.html">X</button>
 				</div>
 				<div class="pan-item tr">
-					<button></button>
+					<div class="php-content"></div>
+					<button data-url="snip2.html">X</button>
 				</div>
 				<div class="pan-item bl">
-					<button></button>
+					<div class="php-content"></div>
+					<button data-url="snip3.html">X</button>
 				</div>
 				<div class="pan-item br">
-					<button></button>
+					<div class="php-content"></div>
+					<button data-url="snip4.html">X</button>
 				</div>
 			</div>
+			
 			<div class="panel right">
 				<div class="close-button">
 					<a href="#" id="close" class="close">
-						<i class="icon-cancel"></i>
+						<i class="icon-cancel">X</i>
 					</a>
 				</div>
-			<h2>Everything you need to know</h2><!-- CONTENT TO REFRESH -->
+				
+				<h2>Everything you need to know</h2><!-- CONTENT TO REFRESH -->
 			</div>
+			
 			<span class="clear"></span>
 		</div>
 		
