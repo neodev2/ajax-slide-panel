@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			
+			var ajaxUrls = [
+				'snip1.html',
+				'snip2.html',
+				'snip3.html',
+				'snip4.html'
+			];
+			
+			var ajaxFiles = [];
+			
+			
+			for(var i=0; i<ajaxUrls.length; i++){
+				
+				$.ajax({
+					method: 'GET',
+					url: ajaxUrls[i],
+					success: function(data){
+						//console.log(data);
+						ajaxFiles.push(data);
+					}
+				});
+				
+			}
+			
+			var fadeDelayIn  = 1000;
+			var fadeDelayOut = 500;
+			
+			
+			$('#php-content').fadeOut(fadeDelayOut);
+			
+			$('.pan-item > button').on('click', function(){
+				
+				if($('.panel.left').hasClass('open')){
+					//alert('already open');
+					
+					$('#php-content').fadeOut(fadeDelayOut);
+					$('#php-content').html(ajaxFiles[$(this).attr('data-ajaxFile')]);
+					$('#php-content').fadeIn(fadeDelayIn);
+					
+				}else{
+					$('.panel.left').addClass('open');
+					$('.standorte-wrapper').addClass('expand');
+					
+					$('#php-content').html(ajaxFiles[$(this).attr('data-ajaxFile')]);
+					$('#php-content').fadeIn(fadeDelayIn);
+				}
+				
+			});
+			
+			
+			$('#close').on('click', function(){
+				
+				$('#php-content').fadeOut(fadeDelayOut);
+				
+				$('.panel.left').removeClass('open');
+				$('.standorte-wrapper').removeClass('expand');
+				
+			});
+			
+		});
+		</script>
+	</head>
+	
+	<body>
+		
+		<div class="standorte-wrapper">
+			
+			<div class="panel left">
+				<div class="pan-item tl">
+					<button data-ajaxFile="0">X</button>
+				</div>
+				<div class="pan-item tr">
+					<button data-ajaxFile="1">X</button>
+				</div>
+				<div class="pan-item bl">
+					<button data-ajaxFile="2">X</button>
+				</div>
+				<div class="pan-item br">
+					<button data-ajaxFile="3">X</button>
+				</div>
+			</div>
+			
+			<div class="panel right">
+				<div class="close-button">
+					<a href="#" id="close" class="close">
+						<i class="icon-cancel">X</i>
+					</a>
+				</div>
+				
+				<div>
+					<h2>Everything you need to know</h2>
+					<div id="php-content"></div>
+				</div>
+				
+			</div>
+			
+			<span class="clear"></span>
+		</div>
+		
+	</body>
+</html>
+
+
+
+
+
+
