@@ -64,7 +64,13 @@ button.show-hide{
 .hidden {
     display: none;
 }
-
+.snippet {
+	width:100%;
+	text-align:center;
+}
+.snipet h1 {
+	font-size: 1.2em;
+}
 
 html {
 	height: 100%;
