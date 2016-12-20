@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<script>
+		$(document).ready(function(){
+			$("#expand").on("click", function(){
+				$(".standorte-wrapper").toggleClass("expand");
+			});
+			
+			$("#close").on("click", function(){
+				$(".standorte-wrapper").toggleClass("expand");
+			});
+		});
+		</script>
+	</head>
+	
+	<body>
+		
+		<div class="standorte-wrapper">
+			<div class="panel left">
+				<div class="pan-item tl">
+					<button href="#" id="expand" class="show-hide">TOGGLE</button>
+				</div><!--
+				--><div class="pan-item tr">
+					<button></button>
+				</div><!--
+				--><div class="pan-item bl">
+					<button></button>
+				</div><!--
+				--><div class="pan-item br">
+					<button></button>
+				</div>
+			</div>
+			<div class="panel right">
+				<div class="close-button">
+					<a href="#" id="close" class="close">
+						<i class="icon-cancel"></i>
+					</a>
+				</div>
+			<h2>Everything you need to know</h2><!-- CONTENT TO REFRESH -->
+			</div>
+		</div>
+		
+	</body>
+</html>
+
+
+
+
+
+
