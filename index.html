@@ -8,24 +8,26 @@
 			
 			$('.pan-item > button').on('click', function(){
 				
+				$that = $(this);
+				
 				if($('.panel.left').hasClass('open')){
 						
 					//alert('already open');
 					
-					if($(this).hasClass('triggerer')){
+					if($that.hasClass('triggerer')){
 						
 						//...
 						
 					}else{
 						
-						$(this).addClass('triggerer');
+						$that.addClass('triggerer');
 						
 						$.ajax({
 							method: 'GET',
-							url: $(this).attr('data-url'),
+							url: $that.attr('data-url'),
 							success: function(data){
 								//console.log(data);
-								$(this).parent().find('>.php-content').html(data);
+								$that.parent().find('>.php-content').html(data);
 							}
 						});
 						
@@ -36,14 +38,14 @@
 					$('.panel.left').addClass('open');
 					$('.standorte-wrapper').addClass('expand');
 					
-					$(this).addClass('triggerer');
+					$that.addClass('triggerer');
 					
 					$.ajax({
 						method: 'GET',
-						url: $(this).attr('data-url'),
+						url: $that.attr('data-url'),
 						success: function(data){
 							//console.log(data);
-							$(this).parent().find('>.php-content').html(data);
+							$that.parent().find('>.php-content').html(data);
 						}
 					});
 					
