@@ -6,50 +6,39 @@
 		<script>
 		$(document).ready(function(){
 			
+			var ajaxUrls = [
+				'snip1.html',
+				'snip2.html',
+				'snip3.html',
+				'snip4.html'
+			];
+			
+			var ajaxFiles = [];
+			
+			
+			for(var i=0; i<ajaxUrls.length; i++){
+				
+				$.ajax({
+					method: 'GET',
+					url: ajaxUrls[i],
+					success: function(data){
+						//console.log(data);
+						ajaxFiles.push(data);
+					}
+				});
+				
+			}
+			
 			$('.pan-item > button').on('click', function(){
 				
-				$that = $(this);
-				
 				if($('.panel.left').hasClass('open')){
-						
 					//alert('already open');
-					
-					if($that.hasClass('triggerer')){
-						
-						//...
-						
-					}else{
-						
-						$that.addClass('triggerer');
-						
-						$.ajax({
-							method: 'GET',
-							url: $that.attr('data-url'),
-							success: function(data){
-								//console.log(data);
-								$('#php-content').html(data);
-							}
-						});
-						
-					}
-					
 				}else{
-					
 					$('.panel.left').addClass('open');
 					$('.standorte-wrapper').addClass('expand');
-					
-					$that.addClass('triggerer');
-					
-					$.ajax({
-						method: 'GET',
-						url: $that.attr('data-url'),
-						success: function(data){
-							//console.log(data);
-							$('#php-content').html(data);
-						}
-					});
-					
 				}
+				
+				$('#php-content').html(ajaxFiles[$(this).attr('data-ajaxFile')]);
 				
 			});
 			
@@ -71,16 +60,16 @@
 			
 			<div class="panel left">
 				<div class="pan-item tl">
-					<button data-url="snip1.html">X</button>
+					<button data-ajaxFile="0">X</button>
 				</div>
 				<div class="pan-item tr">
-					<button data-url="snip2.html">X</button>
+					<button data-ajaxFile="1">X</button>
 				</div>
 				<div class="pan-item bl">
-					<button data-url="snip3.html">X</button>
+					<button data-ajaxFile="2">X</button>
 				</div>
 				<div class="pan-item br">
-					<button data-url="snip4.html">X</button>
+					<button data-ajaxFile="3">X</button>
 				</div>
 			</div>
 			
